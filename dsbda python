@@ -1,0 +1,78 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+df=pd.read_csv('heart.csv')
+
+df.head()
+
+df1=df[['age','sex','cp']]
+df1
+
+merg=pd.concat([df1,df2,df3])
+merg
+
+merged= pd.merge(df1, df2, on='cp', how='inner')
+print("Integrated dataset shape:", merged.shape)
+merged
+
+sort_values = df.sort_values('cp', ascending=True)
+sort_values
+
+sort_values = df.sort_values('age', ascending=True)
+sort_values
+
+df.transpose()
+
+# Melt (reshape) the data - from wide to long format
+df_reshaped = pd.melt(df, id_vars=['age', 'sex'], var_name='measurement', value_name='value')
+# Display reshaped data
+print(df_reshaped.head())
+
+#reshape
+pivot_table=pd.pivot_table(df,index=['age','sex'],values='fbs')
+pivot_table
+
+
+df.isnull()
+
+
+df.isnull().sum()
+
+A=df.dropna()
+A
+
+df_cleaned = df.dropna()
+
+print("\nData after dropping rows with null values:")
+print(df_cleaned)
+
+#Model building
+from sklearn.model_selection import train_test_split
+from sklearn import linear_model , metrics
+
+x=df[['age']]
+y=df[['sex']]
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+
+len(x_train)
+
+len(x_test)
+
+len(y_train)
+
+len(y_test)
+
+reg=linear_model.LinearRegression()
+print(x_train)
+
+model=reg.fit(x_train,y_train)
+
+r_sq=reg.score(x_train,y_train)
+
+print("determination coeff",r_sq)
+print("intercept",model.intercept_)
+
+print("slope",model.coef_)
+y_predict = model.predict(x_test)
+y_predict
