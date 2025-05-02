@@ -1,0 +1,27 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+
+url='https://www.meesho.com/sports-shoes-for-men-pack-of-2/p/88x3fv'
+
+response=requests.get(url)
+soup=BeautifulSoup(response.content,'html.parser')
+
+response=requests.get(url)
+soup=BeautifulSoup(response.content,'html.parser')
+
+scripts=soup.find_all('script',type='application/ld+json')
+
+for script in scripts:
+    try:
+        data=json.loads(script.string)
+        if "review" in data:
+            for review in data["review"]:
+                print(f" Customer name:{review['author']['name']}")
+                print(f" Rating: {review['reviewRating']['ratingValue']}")
+                print(f" Review: {review['reviewBody']}")
+    except Ecxeption as e:
+        continue
+
+rating_tag=soup.find('h1',{'class':'sc-eDvSVe cdZTwf'})
+print ("Overall Rating:",rating_tag.get_text())
