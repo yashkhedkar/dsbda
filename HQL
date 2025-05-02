@@ -1,0 +1,50 @@
+-- Create database
+CREATE DATABASE Dev;
+
+-- Use the created database
+USE Dev;
+
+-- Create table with specific row format
+CREATE TABLE employee (
+    emp_id INT,
+    emp_name VARCHAR(30),
+    emp_designation VARCHAR(30)
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+LOAD DATA LOCAL INPATH "demo.txt" INTO TABLE employee;
+
+SELECT * FROM employee;
+
+ALTER TABLE employee RENAME TO Employee;
+
+CREATE TABLE yash (
+    emp_id INT,
+    emp_name VARCHAR(30),
+    salary VARCHAR(30)
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+INSERT INTO yash VALUES (1, 'Devendra', '89000');
+SELECT * FROM yash;
+
+DROP TABLE table_name;
+
+select a.emp_id, a.emp_name, a.emp_designation, b.emp_salary
+from employee a join yash b
+on (a.emp_id = b.emp_id);
+
+
+create external table dev_external (emp_id int, emp_name varchar(30))
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+insert into dev_external select * from dev;
