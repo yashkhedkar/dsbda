@@ -1,0 +1,31 @@
+✅ Method 1: Forward Fill (pad)
+Fills missing values with the previous non-null value (forward propagation).
+
+python
+Copy
+Edit
+df_pad = df.fillna(method='pad')  # or method='ffill'
+print("\nDataFrame after Forward Fill (pad):\n", df_pad)
+✅ Method 2: Backward Fill (bfill)
+Fills missing values using the next non-null value (backward propagation).
+
+python
+Copy
+Edit
+df_bfill = df.fillna(method='bfill')
+print("\nDataFrame after Backward Fill (bfill):\n", df_bfill)
+✅ Method 3: Filling with Column Mean
+Fills missing values with the mean of each column.
+
+python
+Copy
+Edit
+df_mean = df.fillna(df.mean(numeric_only=True))
+print("\nDataFrame after Filling with Mean:\n", df_mean)
+✅ Bonus: Method 4: Filling with Median
+python
+Copy
+Edit
+df_median = df.fillna(df.median(numeric_only=True))
+print("\nDataFrame after Filling with Median:\n", df_median)
+These are commonly used error correction techniques when dealing with missing numerical data. Would you like to see this applied directly to your heart disease dataset (heart.csv)?
