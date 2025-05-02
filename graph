@@ -1,0 +1,40 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+heart=pd.read_csv('heart.csv')
+
+#BOX PLOT
+plt.figure(figsize=(12,6))
+sns.boxplot(data=heart[["age","trestbps","chol","thalach","oldpeak"]])
+plt.title("Boxplot - Heart Dataset")
+plt.show()
+
+
+#HISTOGRAM
+plt.figure(figsize=(8,5))
+plt.hist(heart["age"],bins=15,color="skyblue",edgecolor="black")
+plt.title("Histogram - Age Distribution")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.show()
+
+#SINGLE LINE
+plt.figure(figsize=(10,5))
+plt.plot(heart["age"],heart["chol"],color='blue')
+plt.title("Single Line Plot - Age vs Cholesterol")
+plt.xlabel("Age")
+plt.ylabel("Cholesterol")
+plt.show()
+
+#MULTIPLE LINE
+plt.figure(figsize=(10,5))
+plt.plot(heart["age"],heart["chol"],color='blue',label="Chol")
+plt.plot(heart["age"],heart["trestbps"],color='red',label="trestbps")
+plt.plot(heart["age"],heart["thalach"],color='green',label="Thalach")
+plt.title("Multiple Line Plot - Age vs All Attributes")
+plt.xlabel("Age")
+plt.ylabel("Attributes")
+plt.grid(True)
+plt.legend()
+plt.show()
